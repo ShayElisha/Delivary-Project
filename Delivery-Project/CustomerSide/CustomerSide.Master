@@ -1,0 +1,98 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="CustomerSide.master.cs" Inherits="Delivery_Project.CustomerSide.CustomerSide" %>
+
+<!DOCTYPE html>
+<html dir="rtl">
+<head runat="server">
+    <title>מערכת הזמנות - לקוחות</title>
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between; /* פיזור הכפתורים */
+            align-items: center; /* מרכוז אנכי */
+            padding: 10px 20px;
+        }
+        .navbar a {
+            float: right;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .navbar a.active {
+            background-color: #04AA6D;
+            color: white;
+        }
+        .logout-btn {
+            padding: 8px 12px; /* רוחב וגובה קטן יותר */
+            font-size: 14px; /* גופן קטן יותר */
+            color: #fff;
+            background-color: #FF6347; /* צבע כפתור */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out; /* שיפור ההגדלה */
+            outline: none; /* למניעת גבולות כחולים במספרד חצות */
+            margin-left:50px;
+        }
+        .logout-btn:hover {
+            background-color: #FF4500; /* צבע כפתור כאשר עוברים עליו עם העכבר */
+            transform: scale(1.05); /* הגדלה קלה כאשר עוברים עליו עם העכבר */
+        }
+        .container {
+            margin-top: 70px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .footer {
+            background-color: #333;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div>
+            <a href='<%= ResolveUrl("/CustomerSide/OrderPage.aspx") %>' class='<% if (Request.Path.Contains("OrderPage")) { %>active<% } %>'>הזמנות</a>
+            <a href='<%= ResolveUrl("/CustomerSide/OrderStatus.aspx") %>' class='<% if (Request.Path.Contains("OrderStatus")) { %>active<% } %>'>סטטוסים</a>
+            <a href='<%= ResolveUrl("/CustomerSide/HistoryOrder.aspx") %>' class='<% if (Request.Path.Contains("HistoryOrder")) { %>active<% } %>'>היסטוריית הזמנות</a>
+        </div>
+             <a href="/Logout.aspx" class="logout-btn">התנתקות</a>    </div>
+
+    <form id="form1" runat="server">
+        <div class="container">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+        </div>
+    </form>
+
+    <div class="footer">
+        <p>&copy; 2024 מערכת הזמנות - לקוחות</p>
+    </div>
+</body>
+</html>

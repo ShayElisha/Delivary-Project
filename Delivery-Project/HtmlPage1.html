@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaflet Geocoding Example</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Leaflet Geocoding Example</h1>
+    <form id="addressForm">
+        <label for="address">Enter Address:</label>
+        <input type="text" id="address" name="address" required>
+        <button type="submit">Search</button>
+        <button type="button" id="clearMarkers">Clear Markers</button>
+    </form>
+    <div id="map"></div>
+    <div id="coordinates">
+        <h2>Coordinates</h2>
+        <p id="lat">Latitude: </p>
+        <p id="lon">Longitude: </p>
+    </div>
+
+    <script>
+        // Initialize the map
+        var map = L.map('map').setView([51.505, -0.09], 13);
+
+        // Add a tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        var markers = [];
+
+        // Function to get coordinates from address
+        function getCoordinates(address) {
+            var url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
+
+            axios.get(url)
+                .then(function (response) {
+                    if (response.data && response.data.length > 0) {
+                        var lat = response.data[0].lat;
+                        var lon = response.data[0].lon;
+
+                        // Set the map view to the coordinates
+                        map.setView([lat, lon], 13);
+
+                        // Add a marker at the coordinates
+                        var marker = L.marker([lat, lon]).addTo(map)
+                            .bindPopup(address)
+                            .openPopup();
+
+                        // Add marker to the array
+                        markers.push(marker);
+
+                        // Display the coordinates
+                        document.getElementById('lat').textContent = `Latitude: ${lat}`;
+                        document.getElementById('lon').textContent = `Longitude: ${lon}`;
+                    } else {
+                        console.log('Address not found');
+                    }
+                })
+                .catch(function (error) {
+                    console.error('Error fetching coordinates:', error);
+                });
+        }
+
+        // Function to clear all markers
+        function clearMarkers() {
+            markers.forEach(function (marker) {
+                map.removeLayer(marker);
+            });
+            markers = [];
+
+            // Clear the coordinates display
+            document.getElementById('lat').textContent = 'Latitude: ';
+            document.getElementById('lon').textContent = 'Longitude: ';
+        }
+
+        // Handle form submission
+        document.getElementById('addressForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            var address = document.getElementById('address').value;
+            getCoordinates(address);
+        });
+
+        // Handle clear markers button click
+        document.getElementById('clearMarkers').addEventListener('click', function () {
+            clearMarkers();
+        });
+    </script>
+</body>
+</html>

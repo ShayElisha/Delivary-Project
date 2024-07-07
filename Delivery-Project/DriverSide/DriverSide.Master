@@ -1,0 +1,122 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="DriverSide.master.cs" Inherits="Delivery_Project.DriverSide.DriverSide" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>מערכת חלוקה - נהגים</title>
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            overflow: hidden;
+            background: linear-gradient(to right, #003366, #004080, #0059b3);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: center; /* מרכז את הכפתורים */
+            align-items: center; /* מרכוז אנכי */
+            padding: 10px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        .navbar a {
+            display: block;
+            color: #ffffff;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            margin: 5px 15px;
+            border-radius: 25px;
+            background: radial-gradient(circle, rgba(0, 89, 179, 1) 0%, rgba(0, 61, 102, 1) 100%);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        .navbar a:hover {
+            background: linear-gradient(145deg, #0073e6, #004080);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+            transform: scale(1.1) rotate(2deg);
+        }
+        .navbar a.active {
+            background-color: #001f33;
+            color: white;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+        }
+        .container1 {
+            margin-top: 120px;
+            min-height:120vh;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .footer {
+            background-color: #004080;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            width: 100%;
+            bottom: 0;
+        }
+        .logout-btn {
+            position: absolute; /* מיקום יחסי למסך */
+            right: 30px; /* מרחק של 30 פיקסלים מהפינה הימנית */
+            top: 10px; /* מרחק מהחלק העליון */
+            padding: 8px 12px; /* רוחב וגובה קטן יותר */
+            font-size: 14px; /* גופן קטן יותר */
+            color: #fff;
+            background-color: #FF6347; /* צבע כפתור */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out; /* שיפור ההגדלה */
+            outline: none; /* למניעת גבולות כחולים במספרד חצות */
+        }
+        .logout-btn:hover {
+            background-color: #FF4500; /* צבע כפתור כאשר עוברים עליו עם העכבר */
+            transform: scale(1.05); /* הגדלה קלה כאשר עוברים עליו עם העכבר */
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href='<%= ResolveUrl("/DriverSide/WorkDriver.aspx") %>' class='<% if (Request.Path.Contains("WorkDriver")) { %>active<% } %>'>קווי חלוקה</a>
+        <a href='<%= ResolveUrl("/DriverSide/HistoryShipments.aspx") %>' class='<% if (Request.Path.Contains("HistoryShipments")) { %>active<% } %>'>היסטוריית חלוקה</a>
+        <a href="/Logout.aspx" class="logout-btn">התנתקות</a>    
+    </div>
+
+    <form id="form1" runat="server">
+        <div class="container1">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+        </div>
+    </form>
+
+    <div class="footer">
+        <p>&copy; 2024 מערכת חלוקה - נהגים</p>
+    </div>
+    <script>
+        document.getElementById("btnLogout").onclick = function () {
+            // ניקוי ה-sessionStorage בלבד
+            sessionStorage.clear();
+
+            // לאחר מכן, מעבר לדף ההתחברות או דף אחר
+            window.location.href = "/MainPage.aspx"; // לדוגמה
+        };
+    </script>
+
+</body>
+</html>
