@@ -51,7 +51,7 @@
                                             <td><%#Eval("status") %></td>
                                             <td><%#Eval("AddDate") %></td>
                                             <td class="center"><a href="DriverAddEdit.aspx?DriverId=<%#Eval("DriverID") %>">ערוך <span class="fa fa-pencil"></span></a>                                      
-                                            <asp:LinkButton ID="lnkDelete" runat="server" CommandName="Delete" CommandArgument='<%# Eval("DriverID") %>' Text="מחק" OnClientClick="return confirm('האם אתה בטוח שברצונך למחוק כתובת זו?');"></asp:LinkButton>                                        </tr>
+                                            <asp:LinkButton ID="lnkDelete" runat="server" CommandName="Delete" CommandArgument='<%# Eval("DriverID")+","+Eval("Id") %>' Text="מחק" OnClientClick="return confirm('האם אתה בטוח שברצונך למחוק כתובת זו?');"></asp:LinkButton>                                        </tr>
                                         </tr>
                                     </ItemTemplate>
                                 </asp:Repeater> 

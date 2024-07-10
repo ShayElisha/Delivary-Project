@@ -1,6 +1,5 @@
 ﻿using BLL;
 using DATA;
-using Delivery_Project.App_Code.BLL;
 using System;
 using System.Collections.Generic;
 using System.Data;

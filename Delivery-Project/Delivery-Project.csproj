@@ -346,6 +346,7 @@
     <Content Include="AdminManager\notifications.html" />
     <Content Include="AdminManager\OrderList.aspx" />
     <Content Include="AdminManager\panels-wells.html" />
+    <Content Include="AdminManager\salariesManager.aspx" />
     <Content Include="AdminManager\ShipmentAddEdit.aspx" />
     <Content Include="AdminManager\ShipmentList.aspx" />
     <Content Include="AdminManager\tables.html" />
@@ -433,6 +434,13 @@
     <Compile Include="AdminManager\OrderList.aspx.designer.cs">
       <DependentUpon>OrderList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AdminManager\salariesManager.aspx.cs">
+      <DependentUpon>salariesManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminManager\salariesManager.aspx.designer.cs">
+      <DependentUpon>salariesManager.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminManager\ShipmentAddEdit.aspx.cs">
       <DependentUpon>ShipmentAddEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -450,7 +458,6 @@
     <Compile Include="App_Code\BLL\Area.cs" />
     <Compile Include="App_Code\BLL\Cities.cs" />
     <Compile Include="App_Code\BLL\Driver.cs" />
-    <Compile Include="App_Code\BLL\Jobs.cs" />
     <Compile Include="App_Code\BLL\Manager.cs" />
     <Compile Include="App_Code\BLL\Orders.cs" />
     <Compile Include="App_Code\BLL\Salaries.cs" />
@@ -461,6 +468,7 @@
     <Compile Include="App_Code\DAL\DriverDAL.cs" />
     <Compile Include="App_Code\DAL\ManagerDAL.cs" />
     <Compile Include="App_Code\DAL\OrderDAL.cs" />
+    <Compile Include="App_Code\DAL\SalariesDAL.cs" />
     <Compile Include="App_Code\DAL\ShipmentsDAL.cs" />
     <Compile Include="App_Code\DbContext.cs" />
     <Compile Include="AdminManager\BackAdmin.Master.cs">

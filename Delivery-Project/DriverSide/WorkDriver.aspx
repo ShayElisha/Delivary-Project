@@ -460,7 +460,7 @@
                                     <asp:Button ID="AddToo" runat="server" CssClass="btn" Text="הוסף למשאית" OnClientClick="HandleAddToTruck(this); return false;" CommandArgument='<%# Eval("ShipId") + "," + Eval("Phone") + "," + Eval("OrderID") %>' OnClick="AddToTruckButton_Click" data-shipment-id='<%# Eval("ShipId") %>' />
                                     <div class="hidden-btns">
                                         <asp:Button ID="btnNavigate" runat="server" CssClass="btn" Text="Navigate" OnClientClick='<%# "navigate(\"" + Eval("DestinationAdd") + ", " + Eval("DestinationCity") + "\"); return false;" %>' />
-                                        <asp:Button ID="Button2" runat="server" CssClass="btn" Text="נמסר" CommandArgument='<%# Eval("ShipId") + "," + Eval("Phone") + "," + Eval("OrderID") %>' OnClick="DeliverOrderButton_Click" />
+                                        <asp:Button ID="Button2" runat="server" CssClass="btn" Text="נמסר" CommandArgument='<%# Eval("ShipId") + "," + Eval("Phone") + "," + Eval("OrderID")+ "," + Eval("DriverID") %>' OnClick="DeliverOrderButton_Click" />
                                         <asp:Button ID="Button3" runat="server" CssClass="btn" Text="שלח הודעת וואטסאפ" CommandArgument='<%# Eval("Phone") %>' OnClick="SendWhatsAppButton_Click" />
                                     </div>
                                 </td>

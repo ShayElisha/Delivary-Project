@@ -61,6 +61,12 @@ namespace Delivery_Project.AdminManager
                     linkButton.Attributes.Add("class", "disabled-link");
                     linkButton.NavigateUrl = "#"; // Prevent navigation
                 }
+                else if (order.status == 3)
+                {
+                    linkButton.Text = "ממתין לאישור הלקוח";
+                    linkButton.Attributes.Add("class", "disabled-link");
+                    linkButton.NavigateUrl = "#"; // Prevent navigation
+                }
                 else
                 {
                     linkButton.Text = "ייצא לנהג";

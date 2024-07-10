@@ -20,6 +20,8 @@ namespace Delivery_Project
             Application["Customers"] = Customers.GetAll();
             Application["Orders"] = Orders.GetAll();
             Application["Shipments"] = Shipments.GetAll();
+            Application["Salaries"] = Salaries.GetAll();
+
 
 
 

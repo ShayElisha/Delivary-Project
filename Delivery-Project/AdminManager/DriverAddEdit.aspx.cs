@@ -1,6 +1,8 @@
 ﻿using BLL;
+using DATA;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -74,26 +76,98 @@ namespace Delivery_Project.AdminManager
             driver.Id = Id.Text;
             driver.FullName = Dname.Text;
             driver.Email = Email.Text;
+            if (!IsValidEmail(Email.Text))
+            {
+                // הצגת הודעת שגיאה עבור אימייל לא תקין
+                ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('אימייל לא תקין');", true);
+                return;
+            }
+            if (IsEmailExists(Email.Text))
+            {
+                // הצגת הודעת שגיאה עבור אימייל קיים
+                ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('אימייל כבר קיים במערכת');", true);
+                return;
+            }
             driver.Password = Password.Text;
+            if (!IsValidPassword(Password.Text))
+            {
+                // הצגת הודעת שגיאה עבור סיסמה לא תקינה
+                ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('הסיסמה חייבת להכיל לפחות 8 תווים, כולל אותיות, מספרים וסימנים מיוחדים');", true);
+                return;
+            }
             driver.CityId = int.Parse(DDLcity.Text);
             driver.Address = Address.Text;
             driver.Phone = Phone.Text;
+            if (!IsValidPhone(Phone.Text))
+            {
+                // הצגת הודעת שגיאה עבור טלפון לא תקין
+                ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('המספר טלפון לא תקין');", true);
+                return;
+            }
             driver.MaxAmountShipment = int.Parse(MaxAmountShipment.Text);
             driver.status = int.Parse(status.Text);
 
-            List<Cities> allCities = Cities.GetAll();
 
 
             
 
             // שמירת העיר החדשה
             driver.Save();
+            Salaries salary = new Salaries();
+            string sqlCheck = $"SELECT COUNT(*) FROM Salaries WHERE DriverID = N'{salary.DriverID}' AND MONTH(AddDate) = {DateTime.Now.Month} AND YEAR(AddDate) = {DateTime.Now.Year}";
+            DbContext Db = new DbContext();
 
+            int recordCount = (int)Db.ExecuteScalar(sqlCheck);
+            DateTime date = DateTime.Now;
+            string sql;
+            if (recordCount == 0)
+            {
+                Salaries salaries = new Salaries();
+                salaries.SalaryID = -1;
+                salaries.DriverID = driver.Id;
+                salaries.Save();
+            }
             // עדכון ה-Application עם רשימת הערים החדשה
             Application["Drivers"] = Driver.GetAll();
 
             // הפנייה לדף רשימת הערים
             Response.Redirect("DriverList.aspx");
+        }
+        private bool IsEmailExists(string email)
+        {
+            DbContext Db = new DbContext(); // יצירת אובייקט מסוג גישה לבסיס נתונים
+            string query = "SELECT COUNT(*) FROM T_Customer WHERE Email = @Email";
+            SqlCommand cmd = new SqlCommand(query, Db.conn);
+            cmd.Parameters.AddWithValue("@Email", email);
+
+            int count = (int)cmd.ExecuteScalar();
+            return count > 0;
+        }
+        private bool IsValidPhone(string phone)
+        {
+            var phonePattern = new System.Text.RegularExpressions.Regex(@"^05\d\d{3}\d{4}$");
+            return phonePattern.IsMatch(phone);
+        }
+        private bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private bool IsValidPassword(string password)
+        {
+            var hasLetter = new System.Text.RegularExpressions.Regex(@"[a-zA-Z]+");
+            var hasDigit = new System.Text.RegularExpressions.Regex(@"\d+");
+            var hasSpecialChar = new System.Text.RegularExpressions.Regex(@"[!@#$%^&*()_+=\[{\]};:<>|./?,-]");
+
+            return password.Length >= 8 && hasLetter.IsMatch(password) && hasDigit.IsMatch(password) && hasSpecialChar.IsMatch(password);
         }
     }
     

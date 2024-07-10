@@ -23,7 +23,7 @@ namespace Delivery_Project.DriverSide
                     // אם לא, להעביר לעמוד התחברות
                     Response.Redirect("/MainPage.aspx");
                 }
-                string driverId = Session["DriverID"].ToString();
+                string driverId = Session["Id"].ToString();
                 List<Shipments> shipments = GetShipmentsByDriverId(driverId);
                 List<Cities> cities = Application["cities"] as List<Cities>;
 
@@ -139,6 +139,7 @@ namespace Delivery_Project.DriverSide
             int shipId = Convert.ToInt32(arguments[0]);
             string phone = "+972" + arguments[1];
             int OrderID = Convert.ToInt32(arguments[2]);
+            string DriverId = arguments[3];
             UpdateShipmentStatusAndDate(shipId, OrderID, 3);
 
             string messageBody = "החבילה נמסרה תודה שהשתמשתם בשירותים שלנו חברת FHD";
@@ -164,6 +165,7 @@ namespace Delivery_Project.DriverSide
 
                 RptProd.DataSource = shipments;
                 RptProd.DataBind();
+                Salaries.calculateSalary(DriverId);
             }
             else
             {

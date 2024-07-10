@@ -1,157 +1,209 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Client-Side.Master" AutoEventWireup="true" CodeBehind="MainPage.aspx.cs" Inherits="Delivery_Project.MainPage" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
     <style>
-        /* סגנונות ל-modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0,0,0);
-            background-color: rgba(0,0,0,0.4);
-        }
+    /* סגנונות ל-modal */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.7);
+        animation: fadeIn 0.5s;
+    }
 
-        .modal-content {
-            background-color: #fefefe;
-            margin: 10% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 400px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-        }
+    .modal-content {
+        background-color: #1E1E1E;
+        color: #FFFFFF;
+        margin: 10% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 400px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        animation: slideIn 0.5s;
+    }
 
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
+    @keyframes fadeIn {
+        from {opacity: 0;}
+        to {opacity: 1;}
+    }
 
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
+    @keyframes slideIn {
+        from {transform: translateY(-50px);}
+        to {transform: translateY(0);}
+    }
 
-        /* סגנונות לטופס הרשמה */
-        .modal-content h2 {
-            margin-bottom: 20px;
-            text-align: center;
-        }
+    .close {
+        color: #CCCCCC;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        transition: color 0.3s;
+    }
 
-        .modal-content input[type="text"],
-        .modal-content input[type="password"],
-        .modal-content input[type="email"],
-        .modal-content input[type="tel"],
-        .modal-content input[type="number"] {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
+    .close:hover,
+    .close:focus {
+        color: #FF6347;
+        text-decoration: none;
+        cursor: pointer;
+    }
 
-        .modal-content .btn {
-            width: 100%;
-            background-color: #4CAF50;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+    /* סגנונות לטופס הרשמה */
+    .modal-content h2 {
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 2em;
+        color: #FF6347;
+        transition: color 0.3s;
+    }
 
-        .modal-content .btn:hover {
-            background-color: #45a049;
-        }
+    .modal-content input[type="text"],
+    .modal-content input[type="password"],
+    .modal-content input[type="email"],
+    .modal-content input[type="tel"],
+    .modal-content input[type="number"] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        background-color: #333333;
+        color: #FFFFFF;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
 
-        /* סגנונות כלליים */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            direction: rtl;
-        }
+    .modal-content input[type="text"]:focus,
+    .modal-content input[type="password"]:focus,
+    .modal-content input[type="email"]:focus,
+    .modal-content input[type="tel"]:focus,
+    .modal-content input[type="number"]:focus {
+        border-color: #FF6347;
+        box-shadow: 0 0 8px rgba(255, 99, 71, 0.6);
+    }
 
-        .container1 {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
-        }
+    .modal-content .btn {
+        width: 100%;
+        background-color: #FF6347;
+        color: #FFFFFF;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
 
-        .register {
-            text-align: center;
-            margin: 20px 0;
-        }
+    .modal-content .btn:hover {
+        background-color: #FF4500;
+        transform: scale(1.05);
+        box-shadow: 0 4px 15px rgba(255, 69, 0, 0.4);
+    }
 
-        .register p {
-            font-size: 1.2em;
-            color: #007BFF;
-            font-weight: bold;
-        }
+    /* סגנונות כלליים */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #2E2E2E;
+        color: #FFFFFF;
+        margin: 0;
+        padding: 0;
+        direction: rtl;
+        transition: background-color 0.3s, color 0.3s;
+    }
 
-        .register .btn {
-            background: linear-gradient(45deg, #007BFF, #00d4ff);
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            display: inline-block;
-            margin: 10px;
-            font-size: 1.1em;
-            font-weight: bold;
-            transition: all 0.3s ease-in-out;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
+    .container1 {
+        width: 80%;
+        margin: auto;
+        overflow: hidden;
+    }
 
-        .register .btn:hover {
-            background: linear-gradient(45deg, #0056b3, #0094ff);
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-        }
+    .register {
+        text-align: center;
+        margin: 20px 0;
+    }
 
-        .box {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            margin-top: 20px;
-        }
+    .register p {
+        font-size: 1.5em;
+        color: #FF6347;
+        font-weight: bold;
+        transition: color 0.3s;
+    }
 
-        .box h1 {
-            text-align: center;
-            color: #4CAF50;
-        }
+    .register .btn {
+        background: linear-gradient(45deg, #FF6347, #FF4500);
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        display: inline-block;
+        margin: 10px;
+        font-size: 1.1em;
+        font-weight: bold;
+        transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
 
-        .box h3 {
-            color: #007BFF;
-        }
+    .register .btn:hover {
+        background: linear-gradient(45deg, #FF4500, #FF6347);
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
 
-        .box p {
-            text-align: justify;
-            margin: 10px 0;
-        }
+    .box {
+        background: #1E1E1E;
+        color: #FFFFFF;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+        transition: box-shadow 0.3s;
+    }
 
-        .user-greeting {
-            text-align: center;
-            margin: 20px 0;
-            font-size: 1.2em;
-            color: #4CAF50;
-        }
-    </style>
+    .box:hover {
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .box h1 {
+        text-align: center;
+        color: #FF6347;
+        font-size: 2.5em;
+        margin-bottom: 20px;
+        transition: color 0.3s;
+    }
+
+    .box h3 {
+        color: #FF4500;
+        font-size: 1.8em;
+        margin-bottom: 15px;
+        transition: color 0.3s;
+    }
+
+    .box p {
+        text-align: justify;
+        margin: 10px 0;
+        font-size: 1.2em;
+        transition: color 0.3s;
+    }
+
+    .user-greeting {
+        text-align: center;
+        margin: 20px 0;
+        font-size: 1.5em;
+        color: #FF6347;
+        transition: color 0.3s;
+    }
+</style>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container1">
@@ -230,7 +282,10 @@
             <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" TextMode="Password" Placeholder="סיסמה"></asp:TextBox><br />
             <asp:TextBox ID="txtPhone" runat="server" CssClass="form-control" Placeholder="טלפון"></asp:TextBox><br />
             <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control" Placeholder="כתובת"></asp:TextBox><br />
-            <asp:TextBox ID="txtCityId" runat="server" CssClass="form-control" Placeholder="מזהה עיר"></asp:TextBox><br />
+           <div class="form-group">
+                <label for="ddlCity">עיר:</label>
+                <asp:DropDownList ID="DDLcity" runat="server" CssClass="form-control"></asp:DropDownList>
+            </div>
             <asp:TextBox ID="txtCompany" runat="server" CssClass="form-control" Placeholder="חברה"></asp:TextBox><br />
             <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-primary" Text="הרשם" OnClick="btnSubmit_Click" />
         </div>
@@ -374,4 +429,13 @@
             }
         }
     </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#<%= DDLcity.ClientID %>').select2({
+                placeholder: 'נא הזן שם עיר',
+            allowClear: true,
+            width: '100%' // מתאים את רוחב הרכיב לרוחב השדה
+        });
+    });
+</script>
 </asp:Content>

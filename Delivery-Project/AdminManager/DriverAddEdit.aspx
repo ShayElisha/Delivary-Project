@@ -1,18 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminManager/BackAdmin.Master" AutoEventWireup="true" CodeBehind="DriverAddEdit.aspx.cs" Inherits="Delivery_Project.AdminManager.DriverAddEdit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#<%= DDLcity.ClientID %>').select2({
-            placeholder: 'בחר עיר',
-            allowClear: true,
-            width: '100%'
-        });
-    });
-</script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainCnt" runat="server">
                     <div class="row">
@@ -75,4 +67,13 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="FooterCnt" runat="server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="UnderFooterCnt" runat="server">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#<%= DDLcity.ClientID %>').select2({
+            placeholder: 'בחר עיר',
+            allowClear: true,
+            width: '100%'
+        });
+    });
+</script>
 </asp:Content>

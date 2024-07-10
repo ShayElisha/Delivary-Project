@@ -1,6 +1,8 @@
 ﻿using BLL;
+using DATA;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -71,10 +73,34 @@ namespace Delivery_Project.AdminManager
             // קביעת שם העיר מהטופס
             manager.FullName = FullName.Text;
             manager.Email = Email.Text;
+            if (!IsValidEmail(Email.Text))
+            {
+                // הצגת הודעת שגיאה עבור אימייל לא תקין
+                ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('אימייל לא תקין');", true);
+                return;
+            }
+            if (IsEmailExists(Email.Text))
+            {
+                // הצגת הודעת שגיאה עבור אימייל קיים
+                ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('אימייל כבר קיים במערכת');", true);
+                return;
+            }
             manager.Password = Password.Text;
+            if (!IsValidPassword(Password.Text))
+            {
+                // הצגת הודעת שגיאה עבור סיסמה לא תקינה
+                ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('הסיסמה חייבת להכיל לפחות 8 תווים, כולל אותיות, מספרים וסימנים מיוחדים');", true);
+                return;
+            }
             manager.CityId = int.Parse(DDLcity.Text);
             manager.Address = Address.Text;
             manager.Phone = Phone.Text;
+            if (!IsValidPhone(Phone.Text))
+            {
+                // הצגת הודעת שגיאה עבור טלפון לא תקין
+                ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('המספר טלפון לא תקין');", true);
+                return;
+            }
             manager.status = int.Parse(status.Text);
             // שמירת העיר החדשה
             manager.Save();
@@ -83,6 +109,42 @@ namespace Delivery_Project.AdminManager
             // הפנייה לדף רשימת הערים
             Response.Redirect("ManagerList.aspx");
         }
-    
+        private bool IsEmailExists(string email)
+        {
+            DbContext Db = new DbContext(); // יצירת אובייקט מסוג גישה לבסיס נתונים
+            string query = "SELECT COUNT(*) FROM T_Customer WHERE Email = @Email";
+            SqlCommand cmd = new SqlCommand(query, Db.conn);
+            cmd.Parameters.AddWithValue("@Email", email);
+
+            int count = (int)cmd.ExecuteScalar();
+            return count > 0;
+        }
+        private bool IsValidPhone(string phone)
+        {
+            var phonePattern = new System.Text.RegularExpressions.Regex(@"^05\d\d{3}\d{4}$");
+            return phonePattern.IsMatch(phone);
+        }
+        private bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private bool IsValidPassword(string password)
+        {
+            var hasLetter = new System.Text.RegularExpressions.Regex(@"[a-zA-Z]+");
+            var hasDigit = new System.Text.RegularExpressions.Regex(@"\d+");
+            var hasSpecialChar = new System.Text.RegularExpressions.Regex(@"[!@#$%^&*()_+=\[{\]};:<>|./?,-]");
+
+            return password.Length >= 8 && hasLetter.IsMatch(password) && hasDigit.IsMatch(password) && hasSpecialChar.IsMatch(password);
+        }
     }
 }
+

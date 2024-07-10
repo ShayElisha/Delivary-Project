@@ -5,6 +5,7 @@
         .order-history-table {
             width: 100%;
             border-collapse: collapse;
+            margin-bottom:90px;
         }
 
         .order-history-table th, .order-history-table td {
