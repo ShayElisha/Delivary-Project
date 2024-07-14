@@ -96,6 +96,7 @@
                         <th>תאריך הזמנה</th>
                         <th>תאריך הגעה</th>
                         <th>סטטוס</th>
+                        <th>דירוג נהג</th>
                        <th>פעולות</th>
                     </tr>
                 </thead>
@@ -116,7 +117,15 @@
                                 <td><%# Eval("OrderDate") %></td>
                                 <td><%# Eval("Datedelivery") %></td>
                                 <td><%# ConvertStatusToText(Eval("Status")) %></td>
-                                                                <td>
+                                <td>
+                                            <asp:DropDownList ID="RatingDriver" runat="server" CssClass="btnConfirm" Visible='<%# Convert.ToInt32(Eval("Status")) == 3 %>'>
+                                                <asp:ListItem Text="1" Value="1"></asp:ListItem>
+                                                <asp:ListItem Text="2" Value="2"></asp:ListItem>
+                                                <asp:ListItem Text="3" Value="3"></asp:ListItem>
+                                                <asp:ListItem Text="4" Value="4"></asp:ListItem>
+                                                <asp:ListItem Text="5" Value="5"></asp:ListItem>
+                                            </asp:DropDownList>
+                                <td>
                                    <asp:PlaceHolder ID="phConfirmButton" runat="server" Visible='<%# Convert.ToInt32(Eval("Status")) == 3 %>'>
                                         <asp:Button ID="btnConfirm" runat="server" Text="אשר הזמנה" OnClick="ConfirmOrder_Click" CommandArgument='<%# Eval("OrderID") %>' CssClass="btnConfirm" />
                                     </asp:PlaceHolder>

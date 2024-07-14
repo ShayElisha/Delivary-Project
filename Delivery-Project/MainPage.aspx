@@ -4,31 +4,173 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
     <style>
-    /* סגנונות ל-modal */
+    /* כללי */
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #2E2E2E, #1A1A1A);
+        color: #FFFFFF;
+        margin: 0;
+        padding: 0;
+        direction: rtl;
+        transition: background 0.5s ease;
+    }
+
+    .container1 {
+        width: 90%;
+        max-width: 1200px;
+        margin: auto;
+        overflow: hidden;
+    }
+
+    /* אנימציית כניסה */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* כפתורים */
+    .register {
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    .btn {
+        background: linear-gradient(45deg, #3498db, #2980b9);
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        font-size: 1.1em;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        position: relative;
+        overflow: hidden;
+        margin: 10px;
+        display: inline-block;
+    }
+
+    .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+    }
+
+    .btn::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 5px;
+        height: 5px;
+        background: rgba(255, 255, 255, 0.5);
+        opacity: 0;
+        border-radius: 100%;
+        transform: scale(1, 1) translate(-50%);
+        transform-origin: 50% 50%;
+    }
+
+    .btn:hover::after {
+        animation: ripple 1s ease-out;
+    }
+
+    @keyframes ripple {
+        0% {
+            transform: scale(0, 0);
+            opacity: 0.5;
+        }
+        100% {
+            transform: scale(20, 20);
+            opacity: 0;
+        }
+    }
+
+    /* תיבות תוכן */
+    .box {
+        background: rgba(30, 30, 30, 0.8);
+        color: #FFFFFF;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        margin-top: 30px;
+        transition: all 0.3s ease;
+        animation: fadeInUp 0.8s ease-out;
+    }
+
+    .box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .box h1 {
+        text-align: center;
+        color: #3498db;
+        font-size: 2.8em;
+        margin-bottom: 30px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .box h3 {
+        color: #2980b9;
+        font-size: 2em;
+        margin-bottom: 20px;
+        position: relative;
+        display: inline-block;
+    }
+
+    .box h3::after {
+        content: '';
+        position: absolute;
+        width: 50%;
+        height: 2px;
+        background-color: #2980b9;
+        bottom: -5px;
+        left: 0;
+        transition: width 0.3s ease;
+    }
+
+    .box:hover h3::after {
+        width: 100%;
+    }
+
+    .box p {
+        text-align: justify;
+        margin: 15px 0;
+        font-size: 1.2em;
+        line-height: 1.6;
+    }
+
+    /* Modal */
     .modal {
         display: none;
         position: fixed;
-        z-index: 1;
+        z-index: 1000;
         left: 0;
         top: 0;
         width: 100%;
         height: 100%;
         overflow: auto;
-        background-color: rgba(0, 0, 0, 0.7);
-        animation: fadeIn 0.5s;
+        background-color: rgba(0, 0, 0, 0.8);
+        animation: fadeIn 0.3s ease-out;
     }
 
     .modal-content {
-        background-color: #1E1E1E;
+        background: linear-gradient(135deg, #2E2E2E, #1A1A1A);
         color: #FFFFFF;
-        margin: 10% auto;
-        padding: 20px;
+        margin: 5% auto;
+        padding: 30px;
         border: 1px solid #888;
-        width: 80%;
-        max-width: 400px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        animation: slideIn 0.5s;
+        width: 90%;
+        max-width: 500px;
+        border-radius: 15px;
+        box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+        animation: slideIn 0.5s ease-out;
     }
 
     @keyframes fadeIn {
@@ -46,161 +188,75 @@
         float: right;
         font-size: 28px;
         font-weight: bold;
-        transition: color 0.3s;
+        transition: all 0.3s ease;
     }
 
     .close:hover,
     .close:focus {
-        color: #FF6347;
+        color: #3498db;
         text-decoration: none;
         cursor: pointer;
+        transform: rotate(90deg);
     }
 
-    /* סגנונות לטופס הרשמה */
-    .modal-content h2 {
-        margin-bottom: 20px;
-        text-align: center;
-        font-size: 2em;
-        color: #FF6347;
-        transition: color 0.3s;
-    }
-
+    /* שדות קלט */
     .modal-content input[type="text"],
     .modal-content input[type="password"],
     .modal-content input[type="email"],
     .modal-content input[type="tel"],
-    .modal-content input[type="number"] {
+    .modal-content input[type="number"],
+    .modal-content select {
         width: 100%;
         padding: 12px 20px;
         margin: 8px 0;
         display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-        background-color: #333333;
-        color: #FFFFFF;
-        transition: border-color 0.3s, box-shadow 0.3s;
-    }
-
-    .modal-content input[type="text"]:focus,
-    .modal-content input[type="password"]:focus,
-    .modal-content input[type="email"]:focus,
-    .modal-content input[type="tel"]:focus,
-    .modal-content input[type="number"]:focus {
-        border-color: #FF6347;
-        box-shadow: 0 0 8px rgba(255, 99, 71, 0.6);
-    }
-
-    .modal-content .btn {
-        width: 100%;
-        background-color: #FF6347;
-        color: #FFFFFF;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    }
-
-    .modal-content .btn:hover {
-        background-color: #FF4500;
-        transform: scale(1.05);
-        box-shadow: 0 4px 15px rgba(255, 69, 0, 0.4);
-    }
-
-    /* סגנונות כלליים */
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #2E2E2E;
-        color: #FFFFFF;
-        margin: 0;
-        padding: 0;
-        direction: rtl;
-        transition: background-color 0.3s, color 0.3s;
-    }
-
-    .container1 {
-        width: 80%;
-        margin: auto;
-        overflow: hidden;
-    }
-
-    .register {
-        text-align: center;
-        margin: 20px 0;
-    }
-
-    .register p {
-        font-size: 1.5em;
-        color: #FF6347;
-        font-weight: bold;
-        transition: color 0.3s;
-    }
-
-    .register .btn {
-        background: linear-gradient(45deg, #FF6347, #FF4500);
-        color: white;
-        padding: 10px 20px;
         border: none;
         border-radius: 25px;
-        cursor: pointer;
-        display: inline-block;
-        margin: 10px;
-        font-size: 1.1em;
-        font-weight: bold;
-        transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .register .btn:hover {
-        background: linear-gradient(45deg, #FF4500, #FF6347);
-        transform: scale(1.05);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    .box {
-        background: #1E1E1E;
+        box-sizing: border-box;
+        background-color: rgba(255, 255, 255, 0.1);
         color: #FFFFFF;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        margin-top: 20px;
-        transition: box-shadow 0.3s;
+        transition: all 0.3s ease;
     }
 
-    .box:hover {
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    .modal-content input:focus,
+    .modal-content select:focus {
+        background-color: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 0 8px rgba(52, 152, 219, 0.6);
     }
 
-    .box h1 {
-        text-align: center;
-        color: #FF6347;
-        font-size: 2.5em;
-        margin-bottom: 20px;
-        transition: color 0.3s;
+    /* Select2 התאמה */
+    .select2-container--default .select2-selection--single {
+        background-color: rgba(255, 255, 255, 0.1);
+        border: none;
+        border-radius: 25px;
+        height: 40px;
     }
 
-    .box h3 {
-        color: #FF4500;
-        font-size: 1.8em;
-        margin-bottom: 15px;
-        transition: color 0.3s;
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        color: #FFFFFF;
+        line-height: 40px;
     }
 
-    .box p {
-        text-align: justify;
-        margin: 10px 0;
-        font-size: 1.2em;
-        transition: color 0.3s;
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        height: 38px;
     }
 
-    .user-greeting {
-        text-align: center;
-        margin: 20px 0;
-        font-size: 1.5em;
-        color: #FF6347;
-        transition: color 0.3s;
+    .select2-dropdown {
+        background-color: #2E2E2E;
+        border: none;
+    }
+
+    .select2-container--default .select2-results__option--highlighted[aria-selected] {
+        background-color: #3498db;
+    }
+
+    .user-greeting{
+        font-size:30px;
+        color:black;
+    }
+    .register1{
+         font-size:30px;
+        color:black;
     }
 </style>
 
@@ -208,19 +264,19 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container1">
         <% if (Session["Manager"] != null) { %>
-            <div class="user-greeting">
+            <div class="register1">
                 <p>מנהל יקר, ברוך הבא!</p>
             </div>
         <% } else if (Session["Driver"] != null) { %>
-            <div class="user-greeting">
+            <div class="register1">
                 <p>נהג יקר, ברוך הבא!</p>
             </div>
         <% } else if (Session["Customer"] != null) { %>
-            <div class="user-greeting">
+            <div class="register1">
                 <p>לקוח יקר, ברוך הבא!</p>
             </div>
         <% } else { %>
-            <div class="register">
+            <div class="register1">
                 <p>לקוחות חדשים מקבלים יותר!!!</p>
                 <p>להצטרפות</p>
                 <asp:Button ID="Register" CssClass="btn" Text="להרשמה" OnClientClick="showRegisterModal(); return false;" runat="server" />

@@ -322,7 +322,6 @@
     <Content Include="AdminManager\images\bootstrap\datatables\sort_desc.png" />
     <Content Include="AdminManager\images\bootstrap\datatables\sort_desc_disabled.png" />
     <Content Include="AdminManager\index.html" />
-    <Content Include="AdminManager\JobsDriver.aspx" />
     <Content Include="AdminManager\js\bootstrap.min.js" />
     <Content Include="AdminManager\js\bootstrap\bootstrap.min.js" />
     <Content Include="AdminManager\js\bootstrap\dataTables.bootstrap.min.js" />
@@ -340,6 +339,7 @@
     <Content Include="AdminManager\js\raphael\raphael.min.js" />
     <Content Include="AdminManager\js\sb-admin-2.js" />
     <Content Include="AdminManager\login.html" />
+    <Content Include="AdminManager\mainPage.aspx" />
     <Content Include="AdminManager\ManagerAddEdit.aspx" />
     <Content Include="AdminManager\ManagerList.aspx" />
     <Content Include="AdminManager\morris.html" />
@@ -406,12 +406,12 @@
     <Compile Include="AdminManager\DriverList.aspx.designer.cs">
       <DependentUpon>DriverList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdminManager\JobsDriver.aspx.cs">
-      <DependentUpon>JobsDriver.aspx</DependentUpon>
+    <Compile Include="AdminManager\mainPage.aspx.cs">
+      <DependentUpon>mainPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdminManager\JobsDriver.aspx.designer.cs">
-      <DependentUpon>JobsDriver.aspx</DependentUpon>
+    <Compile Include="AdminManager\mainPage.aspx.designer.cs">
+      <DependentUpon>mainPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminManager\ManagerAddEdit.aspx.cs">
       <DependentUpon>ManagerAddEdit.aspx</DependentUpon>
@@ -460,6 +460,7 @@
     <Compile Include="App_Code\BLL\Driver.cs" />
     <Compile Include="App_Code\BLL\Manager.cs" />
     <Compile Include="App_Code\BLL\Orders.cs" />
+    <Compile Include="App_Code\BLL\Rating.cs" />
     <Compile Include="App_Code\BLL\Salaries.cs" />
     <Compile Include="App_Code\BLL\Customers.cs" />
     <Compile Include="App_Code\BLL\Shipments.cs" />
@@ -468,6 +469,7 @@
     <Compile Include="App_Code\DAL\DriverDAL.cs" />
     <Compile Include="App_Code\DAL\ManagerDAL.cs" />
     <Compile Include="App_Code\DAL\OrderDAL.cs" />
+    <Compile Include="App_Code\DAL\RatingDAL.cs" />
     <Compile Include="App_Code\DAL\SalariesDAL.cs" />
     <Compile Include="App_Code\DAL\ShipmentsDAL.cs" />
     <Compile Include="App_Code\DbContext.cs" />

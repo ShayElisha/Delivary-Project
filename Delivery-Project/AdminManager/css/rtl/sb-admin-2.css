@@ -13,16 +13,13 @@ body {
 }
 
 #page-wrapper {
-  padding: 0 15px;
   min-height: 568px;
-  background-color: #fff;
 }
 
 @media(min-width:768px) {
   #page-wrapper {
     position: inherit;
     margin: 0 250px 0 0;
-    padding: 0 30px;
     border-right: 1px solid #e7e7e7;
   }
 }
@@ -204,6 +201,7 @@ body {
 .chat-panel .panel-body {
   height: 350px;
   overflow-y: scroll;
+  padding:0;
 }
 
 .login-panel {
@@ -294,11 +292,11 @@ table.dataTable thead .sorting:after {
   border-color: #5cb85c;
 }
 
-.panel-green .panel-heading {
-  border-color: #5cb85c;
-  color: #fff;
-  background-color: #5cb85c;
-}
+    .panel-green .panel-heading {
+        border-color: #5cb85c;
+        color: rgba(192, 178, 131, 0.3);
+        background-color: #5cb85c;
+    }
 
 .panel-green a {
   color: #5cb85c;

@@ -69,9 +69,22 @@
         <a href='<%= ResolveUrl("~/Home/About") %>'>אודות</a>
         <a href='<%= ResolveUrl("~/Home/Login") %>'>התחברות</a>
         <a href='<%= ResolveUrl("~/Home/Contact") %>'>צרו קשר</a>
-        
-
+        <% 
+            bool isManager = Session["IsManager"] != null && (bool)Session["IsManager"];
+            bool isDriver = Session["IsDriver"] != null && (bool)Session["IsDriver"];
+            bool isCustomer = Session["IsCustomer"] != null && (bool)Session["IsCustomer"];
+        %>
+        <% if (isManager) { %>
+            <a href='<%= ResolveUrl("~/AdminManager/mainPage.aspx") %>'>לדף מנהל</a>
+        <% } else if (isDriver) { %>
+            <a href='<%= ResolveUrl("/DriverSide/WorkDriver.aspx") %>'>לדף נהג</a>
+        <% } else if (isCustomer) { %>
+            <a href='<%= ResolveUrl("~/CustomerSide/OrderPage.aspx") %>'>לדף לקוח</a>
+        <% } else { %>
+            <p>עליך לבצע התחברות</p>
+        <% } %>
     </div>
+
 
     <form id="form1" runat="server">
         <div class="container">

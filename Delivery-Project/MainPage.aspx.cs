@@ -120,8 +120,11 @@ namespace Delivery_Project
                 {
                     // ניצור סשן ונשמור את האובייקט של המשתמש 
                     Session["Manager"] = Dr;
+                    Session["IsManager"] = true;
+                    Session["IsDriver"] = false;
+                    Session["IsCustomer"] = false;
                     // נעביר את המשתמש לעמוד מוצרים
-                    Response.Redirect("/AdminManager/ManagerList.aspx");
+                    Response.Redirect("/AdminManager/mainPage.aspx");
                 }
 
             }
@@ -153,6 +156,9 @@ namespace Delivery_Project
                     Session["Id"] = Dr["Id"].ToString();
                     Session["DriverID"] = Dr["DriverID"].ToString();
                     Session["Driver"] = Dr;
+                    Session["IsDriver"] = true;
+                    Session["IsManager"] = false;
+                    Session["IsCustomer"] = false;
                     // נעביר את המשתמש לעמוד מוצרים
                     Response.Redirect("DriverSide/WorkDriver.aspx");
                 }
@@ -175,6 +181,9 @@ namespace Delivery_Project
                     Session["CustomerID"] = Dr["CustomerID"].ToString();
                     Session["FullName"] = Dr["FullName"].ToString();
                     Session["Customer"] = Dr;
+                    Session["IsCustomer"] = true;
+                    Session["IsManager"] = false;
+                    Session["IsDriver"] = false;
                     // נעביר את המשתמש לעמוד מוצרים
                     Response.Redirect("/CustomerSide/OrderPage.aspx");
                 }

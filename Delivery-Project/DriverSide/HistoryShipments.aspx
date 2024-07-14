@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/DriverSide/DriverSide.Master" AutoEventWireup="true" CodeBehind="HistoryShipments.aspx.cs" Inherits="Delivery_Project.DriverSide.HistoryShipments" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server" dir="rtl">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -9,47 +9,85 @@
         }
 
         .container {
-            width: 100%;
+            width: 95%;
+            max-width: 1200px;
+            margin: 20px auto;
             padding: 20px;
-            border: 1px solid #ccc;
             border-radius: 10px;
             background-color: #fff;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            box-sizing: border-box;
         }
 
         h2 {
             text-align: center;
             color: #333;
+            margin-bottom: 30px;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
             margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 200px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            display: block;
+            margin: 10px auto 0;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        table, th, td {
-            border: 1px solid #ddd;
+            margin-top: 20px;
         }
 
         th, td {
             padding: 12px;
-            text-align: left;
+            text-align: right;
+            border-bottom: 1px solid #ddd;
         }
 
         th {
-            background-color: #336699;
-            color: white;
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #333;
         }
 
-        .odd {
-            background-color: #f2f2f2;
+        tr:hover {
+            background-color: #f5f5f5;
         }
 
-        .gradeX:hover {
-            background-color: #e0e0e0;
+        @media (max-width: 768px) {
+            .form-control, .btn {
+                width: 100%;
+            }
         }
     </style>
 </asp:Content>
@@ -57,6 +95,17 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
         <h2>רשימת הזמנות</h2>
+         <div class="row">
+            <div class="col-md-6">
+                <asp:DropDownList ID="ddlMonth" runat="server" CssClass="form-control"></asp:DropDownList>
+            </div>
+            <div class="col-md-6">
+                <asp:DropDownList ID="ddlYear" runat="server" CssClass="form-control"></asp:DropDownList>
+            </div>
+            <div class="col-md-12 text-center">
+                <asp:Button ID="btnSearch" runat="server" Text="חפש" CssClass="btn btn-primary" OnClick="btnSearch_Click" />
+            </div>
+        </div>
         <div class="table-responsive">
             <table class="table table-striped table-bordered">
                 <thead>

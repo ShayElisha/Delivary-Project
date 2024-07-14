@@ -24,6 +24,7 @@
                                         <th>קוד משכורת</th>
                                         <th>קוד נהג</th>
                                         <th>כמות משלוחים</th>
+                                        <th>כמות משלוחים <br>מינימלית</th>
                                         <th> בונוס</th>
                                         <th> כמות תקלות</th>
                                         <th> קנס</th>
@@ -39,6 +40,9 @@
                                                 <td><%#Eval("SalaryID") %></td>
                                                 <td><%#Eval("DriverID") %></td>
                                                 <td><%#Eval("DeliaryAmount") %></td>
+                                                <td>
+                                                   <asp:TextBox ID="MINIQU" Text=<%#Eval("MinimumQuantity") %> runat="server" />
+                                               </td>
                                                  <td>
                                                         <asp:TextBox ID="TxtBonuse" Text=<%#Eval("Bonuse") %> runat="server" />
                                                     </td>

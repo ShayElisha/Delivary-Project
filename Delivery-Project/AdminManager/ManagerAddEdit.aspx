@@ -3,7 +3,56 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <style>
+        :root {
+    --primary-color: #c0b283;
+    --secondary-color: #373737;
+    --background-color: #1c1c1c;
+    --text-color: #f4f4f4;
+    --accent-color: #dcd0c0;
+    --glow-color: rgba(192, 178, 131, 0.3);
+}
 
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    min-height:120vh;
+}
+
+.panel-default {
+    border-color: var(--primary-color);
+}
+
+.panel-heading {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.form-control {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    border-color: var(--primary-color);
+}
+
+.form-control::placeholder {
+    color: var(--accent-color);
+}
+
+label {
+    color: var(--primary-color);
+}
+    </style>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#<%= DDLcity.ClientID %>').select2({

@@ -28,8 +28,10 @@ namespace Delivery_Project.AdminManager
 
             TextBox txtBonuse = (TextBox)item.FindControl("TxtBonuse");
             TextBox txtReport = (TextBox)item.FindControl("txtReport");
+            TextBox MINIQU = (TextBox)item.FindControl("MINIQU");
 
-            if (string.IsNullOrWhiteSpace(txtBonuse.Text) || string.IsNullOrWhiteSpace(txtReport.Text))
+
+            if (string.IsNullOrWhiteSpace(txtBonuse.Text) || string.IsNullOrWhiteSpace(txtReport.Text) || string.IsNullOrWhiteSpace(MINIQU.Text))
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('שדות חובה יש למלא');", true);
                 return;
@@ -41,14 +43,16 @@ namespace Delivery_Project.AdminManager
             Salaries salary = Salaries.GetBySalaryId(SalaryID);
             if (salary != null)
             {
-                if (salary.DeliaryAmount > 20)
+                if (salary.DeliaryAmount > int.Parse(MINIQU.Text))
                 {
                 salary.Bonuse = Decimal.Parse(txtBonuse.Text);
                 }
                 else
                 {
                     salary.Bonuse = 0;
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('שגיאה: לא הגיעה לכמות הדרושה על מנת לקבל בונוס');", true);
                 }
+                salary.MinimumQuantity = int.Parse(MINIQU.Text);
                 salary.Report = int.Parse(txtReport.Text);
                 salary.salary = 200 * salary.DeliaryAmount + salary.Bonuse - salary.faults * salary.Report;
                 salary.Save();

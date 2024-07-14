@@ -17,8 +17,18 @@ namespace Delivery_Project.AdminManager
             if (!IsPostBack)
             {
                 List<Shipments> shipment = Shipments.GetAll();
-                RptProd.DataSource = shipment;
-                RptProd.DataBind();
+                if (shipment != null && shipment.Count > 0)
+                {
+                    RptProd.DataSource = shipment;
+                    RptProd.DataBind();
+                    NoShipmentsPanel.Visible = false;
+
+                }
+                else
+                {
+                    NoShipmentsPanel.Visible = true;
+                }
+
             }
         }
         protected void RptAddresses_ItemCommand(object source, RepeaterCommandEventArgs e)

@@ -24,6 +24,7 @@ namespace DAL
                 {
                     SalaryID = int.Parse(Dt.Rows[i]["SalaryID"] + ""),
                     DriverID = Dt.Rows[i]["DriverID"] + "",
+                    MinimumQuantity = int.Parse(Dt.Rows[i]["MinimumQuantity"] + ""),
                     DeliaryAmount = int.Parse(Dt.Rows[i]["DeliaryAmount"] + ""),
                     faults = int.Parse(Dt.Rows[i]["faults"] + ""),
                     Report = int.Parse(Dt.Rows[i]["Report"] + ""),
@@ -48,6 +49,7 @@ namespace DAL
                 {
                     SalaryID = int.Parse(Dt.Rows[0]["SalaryID"] + ""),
                     DriverID = Dt.Rows[0]["DriverID"] + "",
+                    MinimumQuantity = int.Parse(Dt.Rows[0]["MinimumQuantity"] + ""),
                     DeliaryAmount = int.Parse(Dt.Rows[0]["DeliaryAmount"] + ""),
                     faults = int.Parse(Dt.Rows[0]["faults"] + ""),
                     Report = int.Parse(Dt.Rows[0]["Report"] + ""),
@@ -71,6 +73,7 @@ namespace DAL
                 {
                     SalaryID = int.Parse(Dt.Rows[0]["SalaryID"] + ""),
                     DriverID = Dt.Rows[0]["DriverID"] + "",
+                    MinimumQuantity = int.Parse(Dt.Rows[0]["MinimumQuantity"] + ""),
                     DeliaryAmount = int.Parse(Dt.Rows[0]["DeliaryAmount"] + ""),
                     faults = int.Parse(Dt.Rows[0]["faults"] + ""),
                     Report = int.Parse(Dt.Rows[0]["Report"] + ""),
@@ -95,6 +98,7 @@ namespace DAL
                 // Update existing record
                 sql = "UPDATE Salaries SET ";
                 sql += $"DriverID = N'{salaries.DriverID}', ";
+                sql += $"MinimumQuantity = N'{salaries.MinimumQuantity}', ";
                 sql += $"DeliaryAmount = N'{salaries.DeliaryAmount}', ";
                 sql += $"faults = N'{salaries.faults}', ";
                 sql += $"Report = N'{salaries.Report}', ";

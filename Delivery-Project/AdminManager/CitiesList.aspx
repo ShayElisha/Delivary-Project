@@ -1,5 +1,70 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminManager/BackAdmin.Master" AutoEventWireup="true" CodeBehind="CitiesList.aspx.cs" Inherits="Delivery_Project.AdminManager.CitiesList" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        :root {
+    --primary-color: #c0b283;
+    --secondary-color: #373737;
+    --background-color: #1c1c1c;
+    --text-color: #f4f4f4;
+    --accent-color: #dcd0c0;
+    --glow-color: rgba(192, 178, 131, 0.3);
+}
+
+body {
+    background-color: var(--background-color);
+    color: black;
+}
+
+.panel-default {
+    border-color: var(--primary-color);
+}
+
+.panel-heading {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    border-color: var(--primary-color);
+}
+
+.table thead th {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: var(--glow-color);
+}
+
+.table tbody tr:hover {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.form-control {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    border-color: var(--primary-color);
+}
+
+.form-control::placeholder {
+    color: var(--accent-color);
+}
+
+label {
+    color: var(--primary-color);
+}
+.panel-body{padding:0}
+
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainCnt" runat="server">
                 <div class="row">
@@ -25,6 +90,7 @@
                                             <th>שם עיר</th>
                                             <th>סטטוס</th>
                                             <th>תאריך הוספה</th>
+                                            <th> פעולות</th>
                                         </tr>
                                     </thead>
                                     <tbody>

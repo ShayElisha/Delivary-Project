@@ -10,6 +10,7 @@ namespace BLL
     {
         public int SalaryID {  get; set; }
         public string DriverID { get; set; }
+        public int MinimumQuantity {  get; set; }
         public int DeliaryAmount { get; set; }
         public decimal Bonuse { get; set; }
         public int faults { get; set; }

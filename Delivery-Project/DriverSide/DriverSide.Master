@@ -96,6 +96,7 @@
     <div class="navbar">
         <a href='<%= ResolveUrl("/DriverSide/WorkDriver.aspx") %>' class='<% if (Request.Path.Contains("WorkDriver")) { %>active<% } %>'>קווי חלוקה</a>
         <a href='<%= ResolveUrl("/DriverSide/HistoryShipments.aspx") %>' class='<% if (Request.Path.Contains("HistoryShipments")) { %>active<% } %>'>היסטוריית חלוקה</a>
+        <a href='<%= ResolveUrl("/MainPage.aspx") %>' class='<% if (Request.Path.Contains("MainPage.aspx")) { %>active<% } %>'> לדף הבית</a>
         <a href="/Logout.aspx" class="logout-btn">התנתקות</a>    
     </div>
 
