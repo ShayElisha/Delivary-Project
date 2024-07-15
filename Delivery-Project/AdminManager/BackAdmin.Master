@@ -34,7 +34,250 @@
 <!-- Custom Fonts -->
 <link href="css/font-awesome/font-awesome.min.css" rel="stylesheet" type="text/css">
     <style>
-       
+:root {
+    --primary-color: #c0b283;
+    --secondary-color: #373737;
+    --background-color: #1c1c1c;
+    --text-color: #f4f4f4;
+    --accent-color: #dcd0c0;
+    --glow-color: rgba(192, 178, 131, 0.3);
+}
+
+/* General styles */
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.navbar-default {
+    background-color: var(--primary-color);
+    border-color: var(--secondary-color);
+}
+
+.navbar-default .navbar-brand {
+    color: var(--text-color);
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: var(--accent-color);
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: var(--text-color);
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: var(--accent-color);
+}
+
+/* Sidebar styles */
+.sidebar {
+    background-color: var(--secondary-color);
+}
+
+.sidebar .nav > li > a {
+    color: var(--text-color);
+}
+
+.sidebar .nav > li > a:hover,
+.sidebar .nav > li > a:focus {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+}
+
+.sidebar .nav > li > a .fa {
+    color: var(--accent-color);
+}
+
+.sidebar .nav > li.active > a,
+.sidebar .nav > li.active > a:hover,
+.sidebar .nav > li.active > a:focus {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+}
+
+.sidebar .nav > li.active > a .fa,
+.sidebar .nav > li.active > a:hover .fa,
+.sidebar .nav > li.active > a:focus .fa {
+    color: var(--background-color);
+}
+
+.sidebar ul li a.active {
+    color: var(--text-color);
+    background: var(--primary-color);
+    text-decoration: underline;
+}
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.table th,
+.table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid var(--secondary-color);
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid var(--secondary-color);
+    background-color: var(--primary-color);
+}
+
+.table tbody + tbody {
+    border-top: 2px solid var(--secondary-color);
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: var(--secondary-color);
+}
+
+.table-hover tbody tr:hover {
+    background-color: var(--primary-color);
+}
+
+.table-bordered {
+    border: 1px solid var(--secondary-color);
+}
+
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid var(--secondary-color);
+}
+
+.table-hover .table-hover {
+    color: var(--text-color);
+}
+
+.fa-pencil {
+    color: var(--accent-color);
+    margin-left: 5px;
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+a:focus {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+a:active {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+asp\:LinkButton {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+asp\:LinkButton:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+.panel {
+    border: 1px solid var(--secondary-color);
+    border-radius: 0;
+    box-shadow: 0 2px 3px var(--glow-color);
+}
+
+.panel-heading {
+    background-color: var(--primary-color);
+    border-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+.panel-body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.form-group label {
+    color: var(--accent-color);
+}
+
+.table .form-control {
+    background-color: var(--secondary-color);
+    border: 1px solid var(--primary-color);
+    color: var(--text-color);
+}
+ .panel-heading {
+            background-color: var(--primary-color);
+            border-color: var(--secondary-color);
+            color: var(--text-color);
+            padding: 10px 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+.table .form-control::placeholder {
+    color: var(--text-color);
+}
+button, input, optgroup, select, textarea {
+    margin: 0;
+    font: inherit;
+    color: black;
+}
+.table .form-control:focus {
+    background-color: var(--primary-color);
+    border-color: var(--accent-color);
+    color: var(--background-color);
+}
+
+.table td .form-control {
+    background-color: var(--secondary-color) !important;
+    border: 1px solid var(--primary-color) !important;
+    color: var(--text-color) !important;
+}
+
+.table td .form-control::placeholder {
+    color: var(--accent-color) !important;
+}
+
+.table td .form-control:focus {
+    background-color: var(--primary-color) !important;
+    border-color: var(--accent-color) !important;
+    color: var(--background-color) !important;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: var(--accent-color);
+    border-color: var(--primary-color);
+    color: var(--background-color);
+}
+
+/* Additional styles for better layout and spacing */
+.panel .row {
+    margin-bottom: 15px;
+}
+
+.panel .form-group {
+    margin-bottom: 15px;
+}
+
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
 

@@ -91,7 +91,7 @@ namespace Delivery_Project.AdminManager
                 }
                 if (DtRatingDriver.Length > 0)
                 {
-                    driverRow["RatingDriver"] = Convert.ToDouble(DtRatingDriver[0]["RatingDriver"]);
+                    driverRow["RatingDriver"] = Math.Round(Convert.ToDouble(DtRatingDriver[0]["RatingDriver"]), 2);
                 }
                 else
                 {
